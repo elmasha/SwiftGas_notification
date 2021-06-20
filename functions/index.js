@@ -12,7 +12,7 @@ const db = admin.firestore();
 //  response.send("Hello from Firebase!");
 // });
 
-exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/Notifications/{notification_id}")
+exports.sendNotification = functions.firestore.document("SwiftGas_Client/{User_Id}/Notifications/{notification_id}")
     .onWrite((change, event) => {
         
       // If we set `/users/marie` to {name: "Marie"} then
@@ -26,7 +26,7 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
 
     console.log("we have a new Notification to",User_Id +"  |  " + notification_id);
     
-    return admin.firestore().collection("MGas_Client").doc(User_Id).collection("Notifications")
+    return admin.firestore().collection("SwiftGas_Client").doc(User_Id).collection("Notifications")
     .doc(notification_id).get().then(quertResult => {
 
  
@@ -34,10 +34,10 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
         const message = quertResult.data().type;
         const ord_Id = quertResult.data().Order_iD;
 
-        const from_data = admin.firestore().collection("MGas_Client").doc(User_Id).get();
-        const to_data = admin.firestore().collection("Gas_Vendor").doc(from_user_id).get();
+        const from_data = admin.firestore().collection("SwiftGas_Client").doc(User_Id).get();
+        const to_data = admin.firestore().collection("SwiftGas_Vendor").doc(from_user_id).get();
 
-
+        
         return Promise.all([from_data,to_data]).then(result =>{
 
             const from_name = result[0].data().First_Name;
@@ -57,7 +57,7 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
                     title :"Order from: " + from_name,
                     body : message,
                     icon : "default",
-                    click_action:"com.gas.chapel.TARGETNOTIFICATIONS"
+                    click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
 
                 },
                 data :{  title: "Order from: " + from_name,
@@ -104,7 +104,7 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
             const userID = quertResult.data().User_id;
 
 
-            const from_data = admin.firestore().collection("MGas_Client").doc(userID).get();
+            const from_data = admin.firestore().collection("SwiftGas_Client").doc(userID).get();
             const order_data = admin.firestore().collection("Order_request").doc(doc_ID).get();
 
             return Promise.all([from_data,order_data]).then(result =>{
@@ -123,14 +123,14 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
                 const payload = {
                     notification : {
     
-                        title :"Order confirmed",
-                        body : item_name+" "+itemDesc,
+                        title :"Order "+item_name+" was confirmed",
+                        body : itemDesc,
                         icon : "default",
-                        click_action:"com.gas.chapel.TARGETNOTIFICATIONS"
+                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
     
                     },
-                    data :{  title: "Order confirmed",
-                             message: item_name+" "+itemDesc,
+                    data :{  title: "Order "+item_name+" was confirmed",
+                             message:itemDesc,
                              order_id: ordID  }
                     
                 };
@@ -157,7 +157,7 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
                         title :"Order in transit",
                         body : item_name+" "+itemDesc,
                         icon : "default",
-                        click_action:"com.gas.chapel.TARGETNOTIFICATIONS"
+                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
     
                     },
                     data :{  title: "Order in transit ",
@@ -187,7 +187,7 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
                         title :"Order ready for pick up",
                         body : item_name+" "+itemDesc,
                         icon : "default",
-                        click_action:"com.gas.chapel.TARGETNOTIFICATIONS"
+                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
     
                     },
                     data :{  title: "Order ready for pick up",
@@ -216,14 +216,14 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
                    const payload = {
                     notification : {
     
-                        title :"Order has been rejected",
-                        body : item_name+" "+itemDesc,
+                        title :"Order "+item_name+" was rejected",
+                        body : itemDesc,
                         icon : "default",
-                        click_action:"com.gas.chapel.TARGETNOTIFICATIONS"
+                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
     
                     },
-                    data :{  title: "Order has been rejected",
-                             message: item_name+" "+itemDesc,
+                    data :{  title: "Order "+item_name+" was rejected",
+                             message: itemDesc,
                              order_id: ordID  }
                     
                 };
@@ -233,7 +233,7 @@ exports.sendNotification = functions.firestore.document("MGas_Client/{User_Id}/N
     
     
                     console.log("Sent To:  "+token_id1);
-                    console.log("Order cancled");
+                    console.log("Order canceled");
 
 
     
