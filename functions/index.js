@@ -126,7 +126,7 @@ exports.sendNotification = functions.firestore.document("SwiftGas_Client/{User_I
                         title :"Order "+item_name+" was confirmed",
                         body : itemDesc,
                         icon : "default",
-                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
+                        click_action:"com.swiftgas.swiftel.TARGETNOTIFICATIONS"
     
                     },
                     data :{  title: "Order "+item_name+" was confirmed",
@@ -157,7 +157,7 @@ exports.sendNotification = functions.firestore.document("SwiftGas_Client/{User_I
                         title :"Order in transit",
                         body : item_name+" "+itemDesc,
                         icon : "default",
-                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
+                        click_action:"com.swiftgas.swiftel.TARGETNOTIFICATIONS"
     
                     },
                     data :{  title: "Order in transit ",
@@ -187,7 +187,7 @@ exports.sendNotification = functions.firestore.document("SwiftGas_Client/{User_I
                         title :"Order ready for pick up",
                         body : item_name+" "+itemDesc,
                         icon : "default",
-                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
+                        click_action:"com.swiftgas.swiftel.TARGETNOTIFICATIONS"
     
                     },
                     data :{  title: "Order ready for pick up",
@@ -219,7 +219,7 @@ exports.sendNotification = functions.firestore.document("SwiftGas_Client/{User_I
                         title :"Order "+item_name+" was rejected",
                         body : itemDesc,
                         icon : "default",
-                        click_action:"com.gas.swiftel.TARGETNOTIFICATIONS"
+                        click_action:"com.swiftgas.swiftel.TARGETNOTIFICATIONS"
     
                     },
                     data :{  title: "Order "+item_name+" was rejected",
